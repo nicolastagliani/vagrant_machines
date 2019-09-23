@@ -1,3 +1,11 @@
+# Upgrade and autoremove the packages with no interaction
+apt-get update -y
+export DEBIAN_FRONTEND=noninteractive
+#apt-get -o "Dpkg::Options::=--force-confold" upgrade -y
+apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y
+apt-get autoremove -y
+apt-get autoclean -y
+
 echo "Hello, I'm the provision script"
 echo "I'm running in $(uname) from $(whoami)"
 echo "Installing docker"
@@ -14,11 +22,5 @@ apt-get install -y bash-completion clang-6.0 clang-tidy-6.0
 
 pip install conan
 
-echo "Final cleanup and update of the system"
-# final update of the system and clean of unused/downloaded packages
-# Upgrade and autoremove the packages with no interaction
-apt-get update -y
-export DEBIAN_FRONTEND=noninteractive
-apt-get -o "Dpkg::Options::=--force-confold" upgrade -y
 apt-get autoremove -y
 apt-get autoclean -y
