@@ -1,11 +1,10 @@
 # Upgrade and autoremove the packages with no interaction
 apt-get update -y
 export DEBIAN_FRONTEND=noninteractive
-#apt-get -o "Dpkg::Options::=--force-confold" upgrade -y
-apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y
+apt-get  -o "Dpkg::Options::=--force-confdef" -o "Dpkg::Options::=--force-confold" upgrade -q -y
 
 echo "Installing the rest of the packages"
-apt-get install -y  git git-lfs build-essential clang clang-format ccache python-pip ninja-build valgrind
+apt-get install -y  git git-lfs build-essential clang clang-format ccache python3-pip ninja-build valgrind
 
 # Nice to have packages
 # Autocompletion in terminal for git
