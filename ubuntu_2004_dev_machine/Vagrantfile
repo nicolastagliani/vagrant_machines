@@ -17,6 +17,9 @@ Vagrant.configure("2") do |config|
   config.vm.box_version = "20200430.1.0"
 
   config.vm.hostname = machine_name
+
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+	
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -58,9 +61,11 @@ Vagrant.configure("2") do |config|
   #   vb.gui = true
   #
   #   # Customize the amount of memory on the VM:
-     vb.memory = "4096"
+     vb.memory = "8192"
      vb.cpus = 4
      vb.name = machine_name
+	# disable serial port that slowes the startup
+     vb.customize ["modifyvm", :id, "--uartmode1", "file", "./serial_port"]
   end
   #
   # View the documentation for the provider you are using for more
